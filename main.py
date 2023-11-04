@@ -1,5 +1,9 @@
 import pygame
+from pygame.locals import *
+from player import *
 from constants import *
+
+milis = pygame.time.Clock()
 
 pygame.init() #Se inicializa pygame
 pygame.display.set_caption("Ruin") # Nombre de la pestaña
@@ -10,6 +14,18 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        lista_teclas = pygame.key.get_pressed()
+        if True in lista_teclas:
+            if lista_teclas[K_a]:
+                print("a")
+            if lista_teclas[K_s]:
+                print("s")
+            if lista_teclas[K_w]:
+                print("w")
+            if lista_teclas[K_d]:
+                print("d")
+            if lista_teclas[K_l]:
+                print("l")
 
 screen.fill((255, 255, 255))# Se pinta el fondo de la ventana
 # Se dibuja un círculo azul en el centro
