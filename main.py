@@ -5,6 +5,8 @@ from constants import *
 
 milis = pygame.time.Clock()
 
+direccion = True
+
 pygame.init() #Se inicializa pygame
 pygame.display.set_caption("Ruin") # Nombre de la pestaña
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
@@ -17,12 +19,14 @@ while running:
         lista_teclas = pygame.key.get_pressed()
         if True in lista_teclas:
             if lista_teclas[K_a]:
+                direccion = False
                 print("a")
             if lista_teclas[K_s]:
                 print("s")
             if lista_teclas[K_w]:
                 print("w")
             if lista_teclas[K_d]:
+                direccion = True
                 print("d")
             if lista_teclas[K_l]:
                 print("l")
