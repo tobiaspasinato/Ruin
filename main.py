@@ -46,5 +46,5 @@ while running:
     screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
     screen.blit(backgrond,(0,0)) # Ubicacion del fondo
     pygame.display.flip()# Muestra los cambios en la pantalla
-    milis(FPS)
+    milis.tick(FPS)
 pygame.quit() # Fin
