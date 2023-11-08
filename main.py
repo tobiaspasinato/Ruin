@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
-from player import *
+from clases.player import *
+from clases.enemy import *
 from constants import *
 
 direccion = True
