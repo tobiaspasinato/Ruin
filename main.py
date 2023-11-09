@@ -13,7 +13,7 @@ pygame.mixer.music.set_volume(0.7)
 sonido_fondo = pygame.mixer.Sound("music\music_game.wav")
 sonido_fondo.set_volume(VOLUMEN_MUSICA)
 pygame.display.set_caption("Ruin") # Nombre de la pestaña
-imagen_backgrond = pygame.image.load("./imgs/fondo_game.png") # Cargar imagen del fondo
+imagen_backgrond = pygame.image.load("./imgs/level 1.png") # Cargar imagen del fondo
 backgrond = pygame.transform.scale(imagen_backgrond, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
