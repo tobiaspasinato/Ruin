@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from clases.player import *
+from clases.player import player
 from clases.enemy import *
 from constants import *
 
@@ -16,6 +16,9 @@ pygame.display.set_caption("Ruin") # Nombre de la pestaña
 imagen_backgrond = pygame.image.load("./imgs/fondo_game.png") # Cargar imagen del fondo
 backgrond = pygame.transform.scale(imagen_backgrond, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
+
+player1 = player()
+
 running = True
 
 while running:
@@ -44,6 +47,8 @@ while running:
             sonido_fondo.play()
             print("n")
     
+    # player1.update()
+    player1.draw(screen)
     screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
     screen.blit(backgrond,(0,0)) # Ubicacion del fondo
     pygame.display.flip()# Muestra los cambios en la pantalla
