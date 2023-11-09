@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from clases.player import player
+from clases.player import *
 from clases.enemy import *
 from constants import *
 
@@ -47,10 +47,10 @@ while running:
             sonido_fondo.play()
             print("n")
     
-    # player1.update()
-    player1.draw(screen)
     screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
     screen.blit(backgrond,(0,0)) # Ubicacion del fondo
+    player1.upgrade()
+    player1.dibujar(screen)
     pygame.display.flip()# Muestra los cambios en la pantalla
     milis.tick(FPS)
 pygame.quit() # Fin
