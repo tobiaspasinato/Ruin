@@ -30,14 +30,14 @@ while running:
     if True in lista_teclas:
         if lista_teclas[K_a]:
             direccion = False
-            print("a")
+            player1.control(-5, 0)
         if lista_teclas[K_s]:
-            print("s")
+            player1.control(0, -5)
         if lista_teclas[K_w]:
-            print("w")
+            player1.control(0, 5)
         if lista_teclas[K_d]:
             direccion = True
-            print("d")
+            player1.control(5, 0)
         if lista_teclas[K_l]:
             print("l")
         if lista_teclas[K_m]:
