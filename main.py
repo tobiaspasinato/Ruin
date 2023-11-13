@@ -5,6 +5,7 @@ from clases.enemy import *
 from constants import *
 
 direccion = True
+score = 0
 milis = pygame.time.Clock()
 
 pygame.init() #Se inicializa pygame
@@ -12,12 +13,15 @@ pygame.mixer.init()
 pygame.mixer.music.set_volume(0.7)
 sonido_fondo = pygame.mixer.Sound("music\music_game.wav")
 sonido_fondo.set_volume(VOLUMEN_MUSICA)
+font = pygame.font.SysFont("Arial Narrow", 50)
+text_score = font.render(f"Score: {score}", True, (0, 0, 0))
 pygame.display.set_caption("Ruin") # Nombre de la pestaña
 imagen_backgrond = pygame.image.load("./imgs/level 1.png") # Cargar imagen del fondo
 backgrond = pygame.transform.scale(imagen_backgrond, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
 player1 = player()
+enemy1 = enemy()
 
 running = True
 
@@ -30,25 +34,26 @@ while running:
     if True in lista_teclas:
         if lista_teclas[K_a]:
             direccion = False
-            player1.control(-5, 0)
+            player1.control(-2, 0)
         if lista_teclas[K_s]:
-            player1.control(0, -5)
+            player1.control(0, 2)
         if lista_teclas[K_w]:
-            player1.control(0, 5)
+            player1.control(0, -2)
         if lista_teclas[K_d]:
             direccion = True
-            player1.control(5, 0)
+            player1.control(2, 0)
         if lista_teclas[K_l]:
             print("l")
         if lista_teclas[K_m]:
             sonido_fondo.stop()
             print("m")
-        if lista_teclas[K_n]:
-            sonido_fondo.play()
-            print("n")
-    
+    text_score = font.render(f"Score: {score}", True, (0, 0, 0))
     screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
     screen.blit(backgrond,(0,0)) # Ubicacion del fondo
+    screen.blit(text_score,(350,10))
+    enemy1.moves()
+    enemy1.upgrade()
+    enemy1.dibujar(screen)
     player1.upgrade()
     player1.dibujar(screen)
     pygame.display.flip()# Muestra los cambios en la pantalla

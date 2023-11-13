@@ -25,9 +25,8 @@ class player:
         self.animation = self.stay
         self.image = self.animation[self.frame]
         self.rect = self.image.get_rect()
-        pass
     
-    def control(self, x=0, y=0):
+    def control(self, x, y):
         self.move_x = x
         self.move_y = y
     
@@ -39,8 +38,10 @@ class player:
         
         self.rect.x += self.move_x
         self.rect.y += self.move_y
+        self.move_x = 0
+        self.move_y = 0
+
     
     def dibujar(self, screen):
         self.image = self.animation[self.frame]
-        self.rect = self.image.get_rect()
         screen.blit(self.image, self.rect)
