@@ -25,16 +25,16 @@ class player:
     def __init__(self) -> None:
         self.walk = get_animacion("imgs\player_run.png", 4, 1)
         self.stay = get_animacion("imgs\player_stay.png", 4, 1)
-        self.hit = get_animacion("imgs\player_atack.png", 4, 1)
+        self.hit = get_animacion("imgs\player_atack_3.png", 5, 1)
         self.frame = 0
         self.move_x = 0
         self.move_y = 0
         self.animation = self.stay
         self.image = self.animation[self.frame]
         self.rect = self.image.get_rect()
-        self.walk_i = girar_imagenes(get_animacion("imgs\player_run.png", 4, 1), self.rect.x, self.rect.y)
-        self.stay_i = girar_imagenes(get_animacion("imgs\player_stay.png", 4, 1), self.rect.x, self.rect.y)
-        self.hit_i = girar_imagenes(get_animacion("imgs\player_atack.png", 4, 1), self.rect.x, self.rect.y)
+        self.walk_i = girar_imagenes(self.walk, True, False)
+        self.stay_i = girar_imagenes(self.stay, True, False)
+        self.hit_i = girar_imagenes(self.hit, True, False)
     
     def control(self, x, y):
         self.move_x = x
