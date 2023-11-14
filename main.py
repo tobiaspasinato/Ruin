@@ -26,6 +26,7 @@ enemy1 = enemy()
 running = True
 
 while running:
+    accion_personaje = "stay"
     sonido_fondo.play()
     for event in pygame.event.get():# Se verifica si el usuario cerro la ventana
         if event.type == pygame.QUIT:
@@ -34,19 +35,22 @@ while running:
     if True in lista_teclas:
         if lista_teclas[K_a]:
             direccion = False
+            accion_personaje = "walk"
             player1.control(-2, 0)
         if lista_teclas[K_s]:
+            accion_personaje = "walk"
             player1.control(0, 2)
         if lista_teclas[K_w]:
+            accion_personaje = "walk"
             player1.control(0, -2)
         if lista_teclas[K_d]:
             direccion = True
+            accion_personaje = "walk"
             player1.control(2, 0)
         if lista_teclas[K_l]:
-            print("l")
+            accion_personaje = "atack"
         if lista_teclas[K_m]:
             sonido_fondo.stop()
-            print("m")
     text_score = font.render(f"Score: {score}", True, (0, 0, 0))
     screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
     screen.blit(backgrond,(0,0)) # Ubicacion del fondo
@@ -55,7 +59,7 @@ while running:
     enemy1.upgrade()
     enemy1.dibujar(screen)
     player1.upgrade()
-    player1.dibujar(screen)
+    player1.dibujar(screen, accion_personaje, direccion)
     pygame.display.flip()# Muestra los cambios en la pantalla
     milis.tick(FPS)
 pygame.quit() # Fin
