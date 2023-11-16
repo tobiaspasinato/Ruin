@@ -2,7 +2,7 @@ import pygame
 import random
 from constants import *
 
-def get_animacion(path, columnas, filas):
+def get_animacion(path, columnas, filas, flip = False):
     lista = []
     surface_imagen = pygame.image.load(path)
     fotograma_ancho = int(surface_imagen.get_width()/columnas)
@@ -13,16 +13,19 @@ def get_animacion(path, columnas, filas):
             x = columna * fotograma_ancho
             y = fila * fotograma_alto
             surface_fotograma = surface_imagen.subsurface(x, y, fotograma_ancho, fotograma_alto)
+            if flip == True:
+                surface_fotograma = pygame.transform.flip(surface_fotograma, True, False)
             lista.append(surface_fotograma)
     return lista
 
 class enemy:
-    def __init__(self) -> None:
-        self.stay = get_animacion("imgs\enemy.png", 5, 1)
+    def __init__(self, x : int, y : int) -> None:
+        self.stay_r = get_animacion("imgs\enemy.png", 5, 1)
+        self.stay_i = get_animacion("imgs\enemy.png", 5, 1)
         self.frame = 0
-        self.move_x = 0
-        self.move_y = 0
-        self.animation = self.stay
+        self.move_x = x
+        self.move_y = y
+        self.animation = self.stay_i
         self.image = self.animation[self.frame]
         self.rect = self.image.get_rect()
     

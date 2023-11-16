@@ -21,10 +21,10 @@ class player:
     def __init__(self, x : int, y : int) -> None:
         self.walk_r = get_animacion("imgs\player_run.png", 4, 1)
         self.stay_r = get_animacion("imgs\player_stay.png", 4, 1)
-        self.hit_r = get_animacion("imgs\player_atack_3.png", 5, 1)
+        self.hit_r = get_animacion("imgs\player_atack_4.png", 5, 1)
         self.walk_i = get_animacion("imgs\player_run.png", 4, 1, True)
         self.stay_i = get_animacion("imgs\player_stay.png", 4, 1, True)
-        self.hit_i = get_animacion("imgs\player_atack_3.png", 5, 1, True)
+        self.hit_i = get_animacion("imgs\player_atack_4.png", 5, 1, True)
         self.frame = 0
         self.move_x = x
         self.move_y = y
