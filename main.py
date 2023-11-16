@@ -20,7 +20,7 @@ imagen_backgrond = pygame.image.load("./imgs/level 1.png") # Cargar imagen del f
 backgrond = pygame.transform.scale(imagen_backgrond, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
-player1 = player()
+player1 = player(100, 100)
 enemy1 = enemy()
 
 running = True
