@@ -25,6 +25,7 @@ enemy1 = enemy(140, 100)
 
 running = True
 
+
 while running:
     accion_personaje = "stay"
     sonido_fondo.play()
