@@ -1,11 +1,17 @@
 import pygame
 from pygame.locals import *
-from clases.player import *
-from clases.enemy import *
+from clases.player import player
+from clases.enemy import enemy
+from clases.coin import coin
+from clases.bandera import bandera
 from constants import *
 
 direccion = True
 score = 0
+flag_coin1 = False
+level1 = True
+level2 = False
+level3 = False
 milis = pygame.time.Clock()
 
 pygame.init() #Se inicializa pygame
@@ -20,8 +26,11 @@ imagen_backgrond = pygame.image.load("./imgs/level 1.png") # Cargar imagen del f
 backgrond = pygame.transform.scale(imagen_backgrond, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
+
 player1 = player(175, 0)
-enemy1 = enemy(140, 100)
+enemy1 = enemy(250, 250)
+coin1 = coin(200, 200)
+bandera1 = bandera(150, 300)
 
 running = True
 
@@ -48,10 +57,9 @@ while running:
             direccion = True
             accion_personaje = "walk"
             player1.control(2, 0)
-        if lista_teclas[K_l]:
-            accion_personaje = "atack"
         if lista_teclas[K_m]:
             sonido_fondo.stop()
+    
     text_score = font.render(f"Score: {score}", True, (0, 0, 0))
     screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
     screen.blit(backgrond,(0,0)) # Ubicacion del fondo
@@ -59,6 +67,18 @@ while running:
     enemy1.moves()
     enemy1.upgrade()
     enemy1.dibujar(screen)
+    if flag_coin == False:
+        coin1.upgrade()
+        coin1.dibujar(screen)
+        if player1.rect.colliderect(coin1.rect):
+            flag_coin = True
+            score = score + 10
+    bandera1.upgrade()
+    bandera1.dibujar(screen)
+    if player1.rect.colliderect(bandera1.rect):
+        level1 = False
+        level2 = True
+        level3 = False
     player1.upgrade()
     player1.dibujar(screen, accion_personaje, direccion)
     pygame.display.flip()# Muestra los cambios en la pantalla

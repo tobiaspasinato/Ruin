@@ -14,25 +14,22 @@ def get_animacion(path, columnas, filas, flip = False):
             surface_fotograma = surface_imagen.subsurface(x, y, fotograma_ancho, fotograma_alto)
             if flip == True:
                 surface_fotograma = pygame.transform.flip(surface_fotograma, True, False)
+            surface_fotograma = pygame.transform.scale(surface_fotograma, (25, 25))
             lista.append(surface_fotograma)
     return lista
 
-class player:
+class bandera:
     def __init__(self, x : int, y : int) -> None:
-        self.walk_r = get_animacion("imgs\player_run.png", 4, 1)
-        self.stay_r = get_animacion("imgs\player_stay.png", 4, 1)
-        self.walk_i = get_animacion("imgs\player_run.png", 4, 1, True)
-        self.stay_i = get_animacion("imgs\player_stay.png", 4, 1, True)
+        self.stay = get_animacion("imgs\\bandera.png", 5, 1)
         self.frame = 0
         self.move_x = x
         self.move_y = y
-        self.animation = self.stay_r
+        self.animation = self.stay
         self.image = self.animation[self.frame]
         self.rect = self.image.get_rect()
     
-    def control(self, x, y):
-        self.move_x = x
-        self.move_y = y
+    def imprimir_rect(self):
+        print(self.rect)
     
     def upgrade(self):
         if self.frame < len(self.animation) - 1:
@@ -44,21 +41,8 @@ class player:
         self.rect.y += self.move_y
         self.move_x = 0
         self.move_y = 0
-
     
-    def dibujar(self, screen, accion, direccion):
-        if direccion == True:
-            if accion == "stay":
-                self.animation = self.stay_r
-                self.image = self.animation[self.frame]
-            elif accion == "walk":
-                self.animation = self.walk_r
-                self.image = self.animation[self.frame]
-        else:
-            if accion == "stay":
-                self.animation = self.stay_i
-                self.image = self.animation[self.frame]
-            elif accion == "walk":
-                self.animation = self.walk_i
-                self.image = self.animation[self.frame]
+    def dibujar(self, screen):
+        self.animation = self.stay
+        self.image = self.animation[self.frame]
         screen.blit(self.image, self.rect)
