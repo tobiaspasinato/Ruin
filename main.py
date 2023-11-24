@@ -115,12 +115,12 @@ while running:
         screen.blit(text_score,(325,10))
         screen.blit(text_time,(10,10))
         if level1 == True:
-            if player_level1 == True:
-                player1.move_x = 175
-                player1.move_y = 0
-                player_level1 = False
-                player_level2 = True
-                player_level3 = False
+            # if player_level1 == True:
+            #     player1.move_x = 175
+            #     player1.move_y = 0
+            #     player_level1 = False
+            #     player_level2 = True
+            #     player_level3 = False
             if flag_coin1 == False:
                 coin1.upgrade()
                 coin1.dibujar(screen)
@@ -135,12 +135,12 @@ while running:
                     level2 = True
                     level3 = False
         if level2 == True:
-            if player_level2 == True:
-                player1.move_x = 450
-                player1.move_y = 300
-                player_level1 = False
-                player_level2 = False
-                player_level3 = True
+            # if player_level2 == True:
+            #     player1.move_x = 450
+            #     player1.move_y = 300
+            #     player_level1 = False
+            #     player_level2 = False
+            #     player_level3 = True
             if flag_coin2 == False:
                 coin2.upgrade()
                 coin2.dibujar(screen)
@@ -155,12 +155,12 @@ while running:
                     level2 = False
                     level3 = True
         if level3 == True:
-            if player_level3 == True:
-                player1.move_x = 250
-                player1.move_y = 450
-                player_level1 = False
-                player_level2 = False
-                player_level3 = False
+            # if player_level3 == True:
+            #     player1.move_x = 250
+            #     player1.move_y = 450
+            #     player_level1 = False
+            #     player_level2 = False
+            #     player_level3 = False
             if flag_coin3 == False:
                 coin3.upgrade()
                 coin3.dibujar(screen)
