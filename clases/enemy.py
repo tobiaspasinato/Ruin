@@ -29,31 +29,11 @@ class enemy:
         self.image = self.animation[self.frame]
         self.rect = self.image.get_rect()
     
-    def moves(self):
-        numero_aleatorio = random.randint(1, 15)
-        if numero_aleatorio == 1:
-            self.move_x = 1
-        elif numero_aleatorio == 2:
-            self.move_x = -1
-        elif numero_aleatorio == 3:
-            self.move_y = 1
-        elif numero_aleatorio == 4:
-            self.move_y = -1
-        elif numero_aleatorio == 5:
-            self.move_x = 1
-            self.move_y = 1
-        elif numero_aleatorio == 6:
-            self.move_x = -1
-            self.move_y = -1
-        elif numero_aleatorio == 7:
-            self.move_x = 1
-            self.move_y = -1
-        elif numero_aleatorio == 8:
-            self.move_x = -1
-            self.move_y = 1
-        else:
-            self.move_x = 0
-            self.move_y = 0
+    def moves(self, dirreccion):
+        if dirreccion == True:
+            self.move_y = -2
+        if dirreccion == False:
+            self.move_y = 2
     
     def upgrade(self):
         if self.frame < len(self.animation) - 1:

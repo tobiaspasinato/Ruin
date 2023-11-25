@@ -8,6 +8,8 @@ from clases.muro import muro
 from constants import *
 
 direccion = True
+direccion_enemy = True
+aparicion_level1 = True
 score = 0
 segundos = 0
 level1 = True
@@ -20,7 +22,7 @@ flag_coin1 = False
 flag_coin2 = False
 flag_coin3 = False
 fin_timer = False
-win_flag = False
+game_over_flag = False
 
 milis = pygame.time.Clock()
 
@@ -47,14 +49,23 @@ win_img = pygame.transform.scale(imagen_ganar, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
 player1 = player(0, 0)
+enemy1 = enemy(0, 0)
 pared0_level1 = muro(0, 0, 500, 1)
 pared01_level1 = muro(0, 0, 1, 500)
 pared02_level1 = muro(0, 499, 500, 1)
 pared03_level1 = muro(499, 0, 1, 500)
 #level 1
-pared1_level1 = muro(405, 0, 95, 500)
-pared2_level1 = muro(0, 0, 40, 135)
-pared3_level1 = muro(0, 139, 1, 140)
+pared1_level1 = muro(405, 0, 1, 500)
+pared2_level1 = muro(40, 0, 1, 130)
+pared3_level1 = muro(0, 130, 39, 1)
+pared4_level1 = muro(215, 130, 190, 1)
+pared5_level1 = muro(215, 132, 1, 70)
+pared6_level1 = muro(217, 205, 190, 1)
+pared7_level1 = muro(95, 390, 400, 1)
+pared8_level1 = muro(95, 392, 1, 110)
+pared9_level1 = muro(0, 400, 35, 1)
+pared10_level1 = muro(35, 401, 1, 100)
+
 coin1 = coin(335, 298)
 bandera1 = bandera(55, 470)
 coin2 = coin(125, 340)
@@ -73,9 +84,11 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse = event.pos
             print(mouse)
-            if win_flag == True:
+            if game_over_flag == True:
                 if (mouse[0] > 0 and mouse[0] < 140) and (mouse[1] < 500 and mouse[1] > 440):
                     direccion = True
+                    direccion_enemy = True
+                    aparicion_level1 = True
                     score = 0
                     segundos = 0
                     level1 = True
@@ -88,11 +101,11 @@ while running:
                     flag_coin2 = False
                     flag_coin3 = False
                     fin_timer = False
-                    win_flag = False
+                    game_over_flag = False
         if event.type == timer_segundos:
             if fin_timer == False:
                 segundos = segundos + 1
-    if win_flag == False:
+    if game_over_flag == False:
         lista_teclas = pygame.key.get_pressed()
         if True in lista_teclas:
             if lista_teclas[K_a]:
@@ -116,14 +129,21 @@ while running:
         text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
         screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
         if level1 == True:
+            screen.blit(level1_img,(0,0)) # Ubicacion del fondo
             pared1_level1.crear_muro(screen)
             pared2_level1.crear_muro(screen)
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
             pared02_level1.crear_muro(screen)
             pared03_level1.crear_muro(screen)
-            screen.blit(level1_img,(0,0)) # Ubicacion del fondo
-            # pared3_level1.crear_muro(screen)
+            pared3_level1.crear_muro(screen)
+            pared4_level1.crear_muro(screen)
+            pared5_level1.crear_muro(screen)
+            pared6_level1.crear_muro(screen)
+            pared7_level1.crear_muro(screen)
+            pared8_level1.crear_muro(screen)
+            pared9_level1.crear_muro(screen)
+            pared10_level1.crear_muro(screen)
         elif level2 == True:
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
@@ -136,6 +156,7 @@ while running:
             pared02_level1.crear_muro(screen)
             pared03_level1.crear_muro(screen)
             screen.blit(level3_img,(0,0)) # Ubicacion del fondo
+        
         if level1 == True:
             if player1.rect.colliderect(pared02_level1.rect):
                 player1.control(0, -3)
@@ -147,8 +168,37 @@ while running:
                 player1.control(-3, 0)
             if player1.rect.colliderect(pared2_level1.rect):
                 player1.control(3, 0)
-            # if player1.rect.colliderect(pared3_level1.rect):
-            #     player1.control(0, -3)
+            if player1.rect.colliderect(pared3_level1.rect):
+                player1.control(0, 3)
+            if player1.rect.colliderect(pared4_level1.rect):
+                player1.control(0, -3)
+            if player1.rect.colliderect(pared5_level1.rect):
+                player1.control(-3, 0)
+            if player1.rect.colliderect(pared6_level1.rect):
+                player1.control(0, 3)
+            if player1.rect.colliderect(pared7_level1.rect):
+                player1.control(0, -3)
+            if player1.rect.colliderect(pared8_level1.rect):
+                player1.control(-3, 0) #d
+            if player1.rect.colliderect(pared9_level1.rect):
+                player1.control(0, -3) #s
+            if player1.rect.colliderect(pared10_level1.rect):
+                player1.control(3, 0) #a
+            if enemy1.rect.colliderect(pared6_level1):
+                direccion_enemy = False
+            if enemy1.rect.colliderect(pared7_level1):
+                direccion_enemy = True
+            if aparicion_level1 == True:
+                player1.rect.x = 170
+                player1.rect.y= 1
+                enemy1.rect.x = 230
+                enemy1.rect.y= 250
+                aparicion_level1 = False
+            enemy1.moves(direccion_enemy)
+            enemy1.upgrade()
+            enemy1.dibujar(screen)
+            if player1.rect.colliderect(enemy1.rect):
+                game_over_flag = True
             if flag_coin1 == False:
                 coin1.upgrade()
                 coin1.dibujar(screen)
@@ -162,6 +212,7 @@ while running:
                     level1 = False
                     level2 = True
                     level3 = False
+        
         if level2 == True:
             if player1.rect.colliderect(pared03_level1.rect):
                 player1.control(-3, 0)
@@ -184,6 +235,7 @@ while running:
                     level1 = False
                     level2 = False
                     level3 = True
+        
         if level3 == True:
             if player1.rect.colliderect(pared03_level1.rect):
                 player1.control(-3, 0)
@@ -207,12 +259,12 @@ while running:
                     level2 = False
                     level3 = False
                     fin_timer = True
-                    win_flag = True
+                    game_over_flag = True
         player1.upgrade()
         player1.dibujar(screen, accion_personaje, direccion)
         screen.blit(text_score,(325,10))
         screen.blit(text_time,(10,10))
-    if win_flag == True:
+    if game_over_flag == True:
         screen.blit(win_img,(0,0)) # Ubicacion del fondo
         screen.blit(text_restart,(10,450))
     pygame.display.flip()# Muestra los cambios en la pantalla
