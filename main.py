@@ -129,7 +129,6 @@ while running:
         text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
         screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
         if level1 == True:
-            screen.blit(level1_img,(0,0)) # Ubicacion del fondo
             pared1_level1.crear_muro(screen)
             pared2_level1.crear_muro(screen)
             pared0_level1.crear_muro(screen)
@@ -144,6 +143,7 @@ while running:
             pared8_level1.crear_muro(screen)
             pared9_level1.crear_muro(screen)
             pared10_level1.crear_muro(screen)
+            screen.blit(level1_img,(0,0)) # Ubicacion del fondo
         elif level2 == True:
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
