@@ -51,8 +51,10 @@ pared0_level1 = muro(0, 0, 500, 1)
 pared01_level1 = muro(0, 0, 1, 500)
 pared02_level1 = muro(0, 499, 500, 1)
 pared03_level1 = muro(499, 0, 1, 500)
+#level 1
 pared1_level1 = muro(405, 0, 95, 500)
 pared2_level1 = muro(0, 0, 40, 135)
+pared3_level1 = muro(0, 139, 1, 140)
 coin1 = coin(335, 298)
 bandera1 = bandera(55, 470)
 coin2 = coin(125, 340)
@@ -121,6 +123,7 @@ while running:
             pared02_level1.crear_muro(screen)
             pared03_level1.crear_muro(screen)
             screen.blit(level1_img,(0,0)) # Ubicacion del fondo
+            # pared3_level1.crear_muro(screen)
         elif level2 == True:
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
@@ -144,6 +147,8 @@ while running:
                 player1.control(-3, 0)
             if player1.rect.colliderect(pared2_level1.rect):
                 player1.control(3, 0)
+            # if player1.rect.colliderect(pared3_level1.rect):
+            #     player1.control(0, -3)
             if flag_coin1 == False:
                 coin1.upgrade()
                 coin1.dibujar(screen)
