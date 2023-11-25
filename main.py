@@ -50,6 +50,7 @@ player1 = player(0, 0)
 pared0_level1 = muro(0, 0, 500, 1)
 pared01_level1 = muro(0, 0, 1, 500)
 pared02_level1 = muro(0, 499, 500, 1)
+pared03_level1 = muro(499, 0, 1, 500)
 pared1_level1 = muro(405, 0, 95, 500)
 pared2_level1 = muro(0, 0, 40, 135)
 coin1 = coin(335, 298)
@@ -118,10 +119,19 @@ while running:
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
             pared02_level1.crear_muro(screen)
+            pared03_level1.crear_muro(screen)
             screen.blit(level1_img,(0,0)) # Ubicacion del fondo
         elif level2 == True:
+            pared0_level1.crear_muro(screen)
+            pared01_level1.crear_muro(screen)
+            pared02_level1.crear_muro(screen)
+            pared03_level1.crear_muro(screen)
             screen.blit(level2_img,(0,0)) # Ubicacion del fondo
         elif level3 == True:
+            pared0_level1.crear_muro(screen)
+            pared01_level1.crear_muro(screen)
+            pared02_level1.crear_muro(screen)
+            pared03_level1.crear_muro(screen)
             screen.blit(level3_img,(0,0)) # Ubicacion del fondo
         if level1 == True:
             if player1.rect.colliderect(pared02_level1.rect):
@@ -148,6 +158,14 @@ while running:
                     level2 = True
                     level3 = False
         if level2 == True:
+            if player1.rect.colliderect(pared03_level1.rect):
+                player1.control(-3, 0)
+            if player1.rect.colliderect(pared02_level1.rect):
+                player1.control(0, -3)
+            if player1.rect.colliderect(pared01_level1.rect):
+                player1.control(3, 0)
+            if player1.rect.colliderect(pared0_level1.rect):
+                player1.control(0, 3)
             if flag_coin2 == False:
                 coin2.upgrade()
                 coin2.dibujar(screen)
@@ -162,6 +180,14 @@ while running:
                     level2 = False
                     level3 = True
         if level3 == True:
+            if player1.rect.colliderect(pared03_level1.rect):
+                player1.control(-3, 0)
+            if player1.rect.colliderect(pared02_level1.rect):
+                player1.control(0, -3)
+            if player1.rect.colliderect(pared01_level1.rect):
+                player1.control(3, 0)
+            if player1.rect.colliderect(pared0_level1.rect):
+                player1.control(0, 3)
             if flag_coin3 == False:
                 coin3.upgrade()
                 coin3.dibujar(screen)
