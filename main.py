@@ -189,5 +189,5 @@ while running:
 pygame.quit() # Fin
 
 """
-nota, me quede en la parte de ubicar al personaje una vez pasa de nivel
+falta poner las paredes
 """
