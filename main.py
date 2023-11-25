@@ -4,6 +4,7 @@ from clases.player import player
 from clases.enemy import enemy
 from clases.coin import coin
 from clases.bandera import bandera
+from clases.muro import muro
 from constants import *
 
 direccion = True
@@ -45,7 +46,12 @@ imagen_ganar = pygame.image.load("imgs\end_img.png") # Cargar imagen del fondo
 win_img = pygame.transform.scale(imagen_ganar, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
-player1 = player(175, 0)
+player1 = player(0, 0)
+pared0_level1 = muro(0, 0, 500, 1)
+pared01_level1 = muro(0, 0, 1, 500)
+pared02_level1 = muro(0, 499, 500, 1)
+pared1_level1 = muro(405, 0, 95, 500)
+pared2_level1 = muro(0, 0, 40, 135)
 coin1 = coin(335, 298)
 bandera1 = bandera(55, 470)
 coin2 = coin(125, 340)
@@ -107,20 +113,27 @@ while running:
         text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
         screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
         if level1 == True:
+            pared1_level1.crear_muro(screen)
+            pared2_level1.crear_muro(screen)
+            pared0_level1.crear_muro(screen)
+            pared01_level1.crear_muro(screen)
+            pared02_level1.crear_muro(screen)
             screen.blit(level1_img,(0,0)) # Ubicacion del fondo
         elif level2 == True:
             screen.blit(level2_img,(0,0)) # Ubicacion del fondo
         elif level3 == True:
             screen.blit(level3_img,(0,0)) # Ubicacion del fondo
-        screen.blit(text_score,(325,10))
-        screen.blit(text_time,(10,10))
         if level1 == True:
-            # if player_level1 == True:
-            #     player1.move_x = 175
-            #     player1.move_y = 0
-            #     player_level1 = False
-            #     player_level2 = True
-            #     player_level3 = False
+            if player1.rect.colliderect(pared02_level1.rect):
+                player1.control(0, -3)
+            if player1.rect.colliderect(pared01_level1.rect):
+                player1.control(3, 0)
+            if player1.rect.colliderect(pared0_level1.rect):
+                player1.control(0, 3)
+            if player1.rect.colliderect(pared1_level1.rect):
+                player1.control(-3, 0)
+            if player1.rect.colliderect(pared2_level1.rect):
+                player1.control(3, 0)
             if flag_coin1 == False:
                 coin1.upgrade()
                 coin1.dibujar(screen)
@@ -135,12 +148,6 @@ while running:
                     level2 = True
                     level3 = False
         if level2 == True:
-            # if player_level2 == True:
-            #     player1.move_x = 450
-            #     player1.move_y = 300
-            #     player_level1 = False
-            #     player_level2 = False
-            #     player_level3 = True
             if flag_coin2 == False:
                 coin2.upgrade()
                 coin2.dibujar(screen)
@@ -155,12 +162,6 @@ while running:
                     level2 = False
                     level3 = True
         if level3 == True:
-            # if player_level3 == True:
-            #     player1.move_x = 250
-            #     player1.move_y = 450
-            #     player_level1 = False
-            #     player_level2 = False
-            #     player_level3 = False
             if flag_coin3 == False:
                 coin3.upgrade()
                 coin3.dibujar(screen)
@@ -178,6 +179,8 @@ while running:
                     win_flag = True
         player1.upgrade()
         player1.dibujar(screen, accion_personaje, direccion)
+        screen.blit(text_score,(325,10))
+        screen.blit(text_time,(10,10))
     if win_flag == True:
         screen.blit(win_img,(0,0)) # Ubicacion del fondo
         screen.blit(text_restart,(10,450))
