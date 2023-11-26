@@ -7,22 +7,23 @@ from clases.bandera import bandera
 from clases.muro import muro
 from constants import *
 
+menu_flag = True
 direccion = True
 direccion_enemy = True
 aparicion_level1 = True
-aparicion_level2 = True
+aparicion_level2 = False #False
+aparicion_level3 = False #False
 score = 0
 segundos = 0
 level1 = True  #true
 level2 = False #false
 level3 = False #false
-player_level1 = True
-player_level2 = False
-player_level3 = False
 flag_coin1 = False
 flag_coin2 = False
 flag_coin3 = False
 fin_timer = False
+win_flag = False
+game_flag = True #false
 game_over_flag = False
 
 milis = pygame.time.Clock()
@@ -38,6 +39,8 @@ font = pygame.font.SysFont("Arial Narrow", 50)
 text_score = font.render(f"Score: {score}", True, (0, 0, 0))
 text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
 text_restart = font.render("Restart", True, (255, 255, 255))
+text_save = font.render("Save", True, (255, 255, 255))
+text_menu = font.render("Menu", True, (255, 255, 255))
 pygame.display.set_caption("Ruin") # Nombre de la pestaña
 imagen_level1 = pygame.image.load("./imgs/level 1.png") # Cargar imagen del fondo
 level1_img = pygame.transform.scale(imagen_level1, (LARGO_PANTALLA, ANCHO_PANTALLA))
@@ -80,6 +83,17 @@ pared9_level2 = muro(253, 300, 60, 1)
 pared10_level2 = muro(251, 230, 1, 72)
 pared11_level2 = muro(314, 233, 1, 67)
 #level 3
+pared1_level3 = muro(95, 0, 1, 500)
+pared2_level3 = muro(430, 0, 1, 500)
+pared3_level3 = muro(0, 150, 500, 1)
+pared4_level3 = muro(275, 300, 225, 1)
+pared5_level3 = muro(273, 302, 1, 128)
+pared6_level3 = muro(275, 430, 225, 1)
+pared7_level3 = muro(155, 370, 65, 1)
+pared8_level3 = muro(155, 440, 65, 1)
+pared9_level3 = muro(155, 372, 1, 62)
+pared10_level3 = muro(220, 372, 1, 62)
+
 coin1 = coin(335, 298)
 bandera1 = bandera(55, 470)
 coin2 = coin(125, 340)
@@ -90,7 +104,6 @@ bandera3 = bandera(250, 220)
 running = True
 
 while running:
-    accion_personaje = "stay"
     sonido_fondo.play()
     for event in pygame.event.get():# Se verifica si el usuario cerro la ventana
         if event.type == pygame.QUIT:
@@ -103,244 +116,297 @@ while running:
                     direccion = True
                     direccion_enemy = True
                     aparicion_level1 = True
+                    aparicion_level2 = False #False
+                    aparicion_level3 = False #False
                     score = 0
                     segundos = 0
-                    level1 = True
-                    level2 = False
-                    level3 = False
-                    player_level1 = True
-                    player_level2 = False
-                    player_level3 = False
+                    level1 = True  #true
+                    level2 = False #false
+                    level3 = False #false
                     flag_coin1 = False
                     flag_coin2 = False
                     flag_coin3 = False
                     fin_timer = False
+                    win_flag = False
+                    game_flag = True #false
                     game_over_flag = False
+                if (mouse[0] > 380 and mouse[0] < 500) and (mouse[1] < 500 and mouse[1] > 440):
+                    print("win")
+                if (mouse[0] > 200 and mouse[0] < 300) and (mouse[1] < 500 and mouse[1] > 440):
+                    print("win2")
         if event.type == timer_segundos:
             if fin_timer == False:
                 segundos = segundos + 1
-    if game_over_flag == False:
-        lista_teclas = pygame.key.get_pressed()
-        if True in lista_teclas:
-            if lista_teclas[K_a]:
-                direccion = False
-                accion_personaje = "walk"
-                player1.control(-3, 0)
-            if lista_teclas[K_s]:
-                accion_personaje = "walk"
-                player1.control(0, 3)
-            if lista_teclas[K_w]:
-                accion_personaje = "walk"
-                player1.control(0, -3)
-            if lista_teclas[K_d]:
-                direccion = True
-                accion_personaje = "walk"
-                player1.control(3, 0)
-            if lista_teclas[K_m]:
-                sonido_fondo.stop()
-        
-        text_score = font.render(f"Score: {score}", True, (0, 0, 0))
-        text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
-        screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
-        if level1 == True:
-            pared1_level1.crear_muro(screen)
-            pared2_level1.crear_muro(screen)
-            pared0_level1.crear_muro(screen)
-            pared01_level1.crear_muro(screen)
-            pared02_level1.crear_muro(screen)
-            pared03_level1.crear_muro(screen)
-            pared3_level1.crear_muro(screen)
-            pared4_level1.crear_muro(screen)
-            pared5_level1.crear_muro(screen)
-            pared6_level1.crear_muro(screen)
-            pared7_level1.crear_muro(screen)
-            pared8_level1.crear_muro(screen)
-            pared9_level1.crear_muro(screen)
-            pared10_level1.crear_muro(screen)
-            screen.blit(level1_img,(0,0)) # Ubicacion del fondo
-        elif level2 == True:
-            screen.blit(level2_img,(0,0)) # Ubicacion del fondo
-            pared0_level1.crear_muro(screen)
-            pared01_level1.crear_muro(screen)
-            pared02_level1.crear_muro(screen)
-            pared03_level1.crear_muro(screen)
-            pared1_level2.crear_muro(screen)
-            pared2_level2.crear_muro(screen)
-            pared3_level2.crear_muro(screen)
-            pared4_level2.crear_muro(screen)
-            pared5_level2.crear_muro(screen)
-            pared6_level2.crear_muro(screen)
-            pared7_level2.crear_muro(screen)
-            pared8_level2.crear_muro(screen)
-            pared9_level2.crear_muro(screen)
-            pared10_level2.crear_muro(screen)
-            pared11_level2.crear_muro(screen)
-        elif level3 == True:
-            pared0_level1.crear_muro(screen)
-            pared01_level1.crear_muro(screen)
-            pared02_level1.crear_muro(screen)
-            pared03_level1.crear_muro(screen)
-            screen.blit(level3_img,(0,0)) # Ubicacion del fondo
-        
-        if level1 == True:
-            if player1.rect.colliderect(pared02_level1.rect):
-                player1.control(0, -3)
-            if player1.rect.colliderect(pared01_level1.rect):
-                player1.control(3, 0)
-            if player1.rect.colliderect(pared0_level1.rect):
-                player1.control(0, 3)
-            if player1.rect.colliderect(pared1_level1.rect):
-                player1.control(-3, 0)
-            if player1.rect.colliderect(pared2_level1.rect):
-                player1.control(3, 0)
-            if player1.rect.colliderect(pared3_level1.rect):
-                player1.control(0, 3)
-            if player1.rect.colliderect(pared4_level1.rect):
-                player1.control(0, -3)
-            if player1.rect.colliderect(pared5_level1.rect):
-                player1.control(-3, 0)
-            if player1.rect.colliderect(pared6_level1.rect):
-                player1.control(0, 3)
-            if player1.rect.colliderect(pared7_level1.rect):
-                player1.control(0, -3)
-            if player1.rect.colliderect(pared8_level1.rect):
-                player1.control(-3, 0) #d
-            if player1.rect.colliderect(pared9_level1.rect):
-                player1.control(0, -3) #s
-            if player1.rect.colliderect(pared10_level1.rect):
-                player1.control(3, 0) #a
-            if enemy1.rect.colliderect(pared6_level1):
-                direccion_enemy = False
-            if enemy1.rect.colliderect(pared7_level1):
-                direccion_enemy = True
-            if aparicion_level1 == True:
-                player1.rect.x = 170
-                player1.rect.y= 1
-                enemy1.rect.x = 230
-                enemy1.rect.y= 250
-                aparicion_level1 = False
-                aparicion_level2 = True
-            enemy1.moves(direccion_enemy)
-            enemy1.upgrade()
-            enemy1.dibujar(screen)
-            if player1.rect.colliderect(enemy1.rect):
-                game_over_flag = True
-            if flag_coin1 == False:
-                coin1.upgrade()
-                coin1.dibujar(screen)
-                if player1.rect.colliderect(coin1.rect):
-                    flag_coin1 = True
-                    score = score + 10
-            if flag_coin1 == True:
-                bandera1.upgrade()
-                bandera1.dibujar(screen)
-                if player1.rect.colliderect(bandera1.rect):
-                    level1 = False
-                    level2 = True
-                    level3 = False
-        
-        if level2 == True:
-            if player1.rect.colliderect(pared03_level1.rect):
-                player1.control(-3, 0)
-            if player1.rect.colliderect(pared02_level1.rect):
-                player1.control(0, -3)
-            if player1.rect.colliderect(pared01_level1.rect):
-                player1.control(3, 0)
-            if player1.rect.colliderect(pared0_level1.rect):
-                player1.control(0, 3)
-            if player1.rect.colliderect(pared1_level2.rect):
-                player1.control(0, -3) #s
-            if player1.rect.colliderect(pared2_level2.rect):
-                player1.control(3, 0) #a
-            if player1.rect.colliderect(pared3_level2.rect):
-                player1.control(-3, 0) #d
-            if player1.rect.colliderect(pared4_level2.rect):
-                player1.control(0, 3) # w
-            if player1.rect.colliderect(pared5_level2.rect):
-                player1.control(0, 3) # w
-            if player1.rect.colliderect(pared6_level2.rect):
-                player1.control(0, -3) #s
-            if player1.rect.colliderect(pared7_level2.rect):
-                player1.control(3, 0) #a
-            if player1.rect.colliderect(pared8_level2.rect):
-                player1.control(0, -3) #s
-            if player1.rect.colliderect(pared9_level2.rect):
-                player1.control(0, 3) # w
-            if player1.rect.colliderect(pared10_level2.rect):
-                player1.control(-3, 0) #d
-            if player1.rect.colliderect(pared11_level2.rect):
-                player1.control(3, 0) #a
-            if enemy1.rect.colliderect(pared5_level2):
-                direccion_enemy = False
-            if enemy1.rect.colliderect(pared1_level2):
-                direccion_enemy = True
-            if flag_coin2 == False:
-                coin2.upgrade()
-                coin2.dibujar(screen)
-                if player1.rect.colliderect(coin2.rect):
-                    flag_coin2 = True
-                    score = score + 10
-            if aparicion_level2 == True:
-                player1.rect.x = 450
-                player1.rect.y= 300
-                enemy1.rect.x = 185
-                enemy1.rect.y= 280
-                enemy2.rect.x = 285
-                enemy2.rect.y= 100
-                aparicion_level2 = False
-            enemy1.moves(direccion_enemy)
-            enemy1.upgrade()
-            enemy1.dibujar(screen)
-            enemy2.moves_x(direccion_enemy)
-            enemy2.upgrade()
-            enemy2.dibujar(screen)
-            if player1.rect.colliderect(enemy1.rect):
-                game_over_flag = True
-            if player1.rect.colliderect(enemy2.rect):
-                game_over_flag = True
-            if flag_coin2 == True:
-                bandera2.upgrade()
-                bandera2.dibujar(screen)
-                if player1.rect.colliderect(bandera2.rect):
-                    level1 = False
-                    level2 = False
-                    level3 = True
-        
-        if level3 == True:
-            if player1.rect.colliderect(pared03_level1.rect):
-                player1.control(-3, 0)
-            if player1.rect.colliderect(pared02_level1.rect):
-                player1.control(0, -3)
-            if player1.rect.colliderect(pared01_level1.rect):
-                player1.control(3, 0)
-            if player1.rect.colliderect(pared0_level1.rect):
-                player1.control(0, 3)
-            if flag_coin3 == False:
-                coin3.upgrade()
-                coin3.dibujar(screen)
-                if player1.rect.colliderect(coin3.rect):
-                    flag_coin3 = True
-                    score = score + 10
-            if flag_coin3 == True:
-                bandera3.upgrade()
-                bandera3.dibujar(screen)
-                if player1.rect.colliderect(bandera3.rect):
-                    level1 = False
-                    level2 = False
-                    level3 = False
-                    fin_timer = True
+    if game_flag == True:
+        accion_personaje = "stay"
+        if game_over_flag == False:
+            lista_teclas = pygame.key.get_pressed()
+            if True in lista_teclas:
+                if lista_teclas[K_a]:
+                    direccion = False
+                    accion_personaje = "walk"
+                    player1.control(-3, 0)
+                if lista_teclas[K_s]:
+                    accion_personaje = "walk"
+                    player1.control(0, 3)
+                if lista_teclas[K_w]:
+                    accion_personaje = "walk"
+                    player1.control(0, -3)
+                if lista_teclas[K_d]:
+                    direccion = True
+                    accion_personaje = "walk"
+                    player1.control(3, 0)
+                if lista_teclas[K_m]:
+                    sonido_fondo.stop()
+            
+            text_score = font.render(f"Score: {score}", True, (0, 0, 0))
+            text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
+            screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
+            if level1 == True:
+                pared1_level1.crear_muro(screen)
+                pared2_level1.crear_muro(screen)
+                pared0_level1.crear_muro(screen)
+                pared01_level1.crear_muro(screen)
+                pared02_level1.crear_muro(screen)
+                pared03_level1.crear_muro(screen)
+                pared3_level1.crear_muro(screen)
+                pared4_level1.crear_muro(screen)
+                pared5_level1.crear_muro(screen)
+                pared6_level1.crear_muro(screen)
+                pared7_level1.crear_muro(screen)
+                pared8_level1.crear_muro(screen)
+                pared9_level1.crear_muro(screen)
+                pared10_level1.crear_muro(screen)
+                screen.blit(level1_img,(0,0)) # Ubicacion del fondo
+            elif level2 == True:
+                pared0_level1.crear_muro(screen)
+                pared01_level1.crear_muro(screen)
+                pared02_level1.crear_muro(screen)
+                pared03_level1.crear_muro(screen)
+                pared1_level2.crear_muro(screen)
+                pared2_level2.crear_muro(screen)
+                pared3_level2.crear_muro(screen)
+                pared4_level2.crear_muro(screen)
+                pared5_level2.crear_muro(screen)
+                pared6_level2.crear_muro(screen)
+                pared7_level2.crear_muro(screen)
+                pared8_level2.crear_muro(screen)
+                pared9_level2.crear_muro(screen)
+                pared10_level2.crear_muro(screen)
+                pared11_level2.crear_muro(screen)
+                screen.blit(level2_img,(0,0)) # Ubicacion del fondo
+            elif level3 == True:
+                pared0_level1.crear_muro(screen)
+                pared01_level1.crear_muro(screen)
+                pared02_level1.crear_muro(screen)
+                pared03_level1.crear_muro(screen)
+                pared1_level3.crear_muro(screen)
+                pared2_level3.crear_muro(screen)
+                pared3_level3.crear_muro(screen)
+                pared4_level3.crear_muro(screen)
+                pared5_level3.crear_muro(screen)
+                pared6_level3.crear_muro(screen)
+                pared7_level3.crear_muro(screen)
+                pared8_level3.crear_muro(screen)
+                pared9_level3.crear_muro(screen)
+                pared10_level3.crear_muro(screen)
+                screen.blit(level3_img,(0,0)) # Ubicacion del fondo
+            
+            if level1 == True:
+                if player1.rect.colliderect(pared02_level1.rect):
+                    player1.control(0, -3)
+                if player1.rect.colliderect(pared01_level1.rect):
+                    player1.control(3, 0)
+                if player1.rect.colliderect(pared0_level1.rect):
+                    player1.control(0, 3)
+                if player1.rect.colliderect(pared1_level1.rect):
+                    player1.control(-3, 0)
+                if player1.rect.colliderect(pared2_level1.rect):
+                    player1.control(3, 0)
+                if player1.rect.colliderect(pared3_level1.rect):
+                    player1.control(0, 3)
+                if player1.rect.colliderect(pared4_level1.rect):
+                    player1.control(0, -3)
+                if player1.rect.colliderect(pared5_level1.rect):
+                    player1.control(-3, 0)
+                if player1.rect.colliderect(pared6_level1.rect):
+                    player1.control(0, 3)
+                if player1.rect.colliderect(pared7_level1.rect):
+                    player1.control(0, -3)
+                if player1.rect.colliderect(pared8_level1.rect):
+                    player1.control(-3, 0) #d
+                if player1.rect.colliderect(pared9_level1.rect):
+                    player1.control(0, -3) #s
+                if player1.rect.colliderect(pared10_level1.rect):
+                    player1.control(3, 0) #a
+                if enemy1.rect.colliderect(pared6_level1):
+                    direccion_enemy = False
+                if enemy1.rect.colliderect(pared7_level1):
+                    direccion_enemy = True
+                if aparicion_level1 == True:
+                    player1.rect.x = 170
+                    player1.rect.y= 1
+                    enemy1.rect.x = 230
+                    enemy1.rect.y= 250
+                    aparicion_level1 = False
+                    aparicion_level2 = True
+                enemy1.moves(direccion_enemy)
+                enemy1.upgrade()
+                enemy1.dibujar(screen)
+                if player1.rect.colliderect(enemy1.rect):
                     game_over_flag = True
-        player1.upgrade()
-        player1.dibujar(screen, accion_personaje, direccion)
-        screen.blit(text_score,(325,10))
-        screen.blit(text_time,(10,10))
-    if game_over_flag == True:
-        screen.blit(win_img,(0,0)) # Ubicacion del fondo
-        screen.blit(text_restart,(10,450))
+                if flag_coin1 == False:
+                    coin1.upgrade()
+                    coin1.dibujar(screen)
+                    if player1.rect.colliderect(coin1.rect):
+                        flag_coin1 = True
+                        score = score + 10
+                if flag_coin1 == True:
+                    bandera1.upgrade()
+                    bandera1.dibujar(screen)
+                    if player1.rect.colliderect(bandera1.rect):
+                        level1 = False
+                        level2 = True
+                        level3 = False
+            
+            if level2 == True:
+                if player1.rect.colliderect(pared03_level1.rect):
+                    player1.control(-3, 0)
+                if player1.rect.colliderect(pared02_level1.rect):
+                    player1.control(0, -3)
+                if player1.rect.colliderect(pared01_level1.rect):
+                    player1.control(3, 0)
+                if player1.rect.colliderect(pared0_level1.rect):
+                    player1.control(0, 3)
+                if player1.rect.colliderect(pared1_level2.rect):
+                    player1.control(0, -3) #s
+                if player1.rect.colliderect(pared2_level2.rect):
+                    player1.control(3, 0) #a
+                if player1.rect.colliderect(pared3_level2.rect):
+                    player1.control(-3, 0) #d
+                if player1.rect.colliderect(pared4_level2.rect):
+                    player1.control(0, 3) # w
+                if player1.rect.colliderect(pared5_level2.rect):
+                    player1.control(0, 3) # w
+                if player1.rect.colliderect(pared6_level2.rect):
+                    player1.control(0, -3) #s
+                if player1.rect.colliderect(pared7_level2.rect):
+                    player1.control(3, 0) #a
+                if player1.rect.colliderect(pared8_level2.rect):
+                    player1.control(0, -3) #s
+                if player1.rect.colliderect(pared9_level2.rect):
+                    player1.control(0, 3) # w
+                if player1.rect.colliderect(pared10_level2.rect):
+                    player1.control(-3, 0) #d
+                if player1.rect.colliderect(pared11_level2.rect):
+                    player1.control(3, 0) #a
+                if enemy1.rect.colliderect(pared5_level2):
+                    direccion_enemy = False
+                if enemy1.rect.colliderect(pared1_level2):
+                    direccion_enemy = True
+                if flag_coin2 == False:
+                    coin2.upgrade()
+                    coin2.dibujar(screen)
+                    if player1.rect.colliderect(coin2.rect):
+                        flag_coin2 = True
+                        score = score + 10
+                if aparicion_level2 == True:
+                    player1.rect.x = 450
+                    player1.rect.y= 300
+                    enemy1.rect.x = 185
+                    enemy1.rect.y= 280
+                    enemy2.rect.x = 285
+                    enemy2.rect.y= 100
+                    aparicion_level2 = False
+                    aparicion_level3 = True
+                enemy1.moves(direccion_enemy)
+                enemy1.upgrade()
+                enemy1.dibujar(screen)
+                enemy2.moves_x(direccion_enemy)
+                enemy2.upgrade()
+                enemy2.dibujar(screen)
+                if player1.rect.colliderect(enemy1.rect):
+                    game_over_flag = True
+                if player1.rect.colliderect(enemy2.rect):
+                    game_over_flag = True
+                if flag_coin2 == True:
+                    bandera2.upgrade()
+                    bandera2.dibujar(screen)
+                    if player1.rect.colliderect(bandera2.rect):
+                        level1 = False
+                        level2 = False
+                        level3 = True
+            
+            if level3 == True:
+                if player1.rect.colliderect(pared03_level1.rect):
+                    player1.control(-3, 0)
+                if player1.rect.colliderect(pared02_level1.rect):
+                    player1.control(0, -3)
+                if player1.rect.colliderect(pared01_level1.rect):
+                    player1.control(3, 0)
+                if player1.rect.colliderect(pared0_level1.rect):
+                    player1.control(0, 3)
+                if player1.rect.colliderect(pared1_level3.rect):
+                    player1.control(3, 0) #a
+                if player1.rect.colliderect(pared2_level3.rect):
+                    player1.control(-3, 0) #d
+                if player1.rect.colliderect(pared3_level3.rect):
+                    player1.control(0, 3) # w
+                if player1.rect.colliderect(pared4_level3.rect):
+                    player1.control(0, -3) #s
+                if player1.rect.colliderect(pared5_level3.rect):
+                    player1.control(-3, 0) #d
+                if player1.rect.colliderect(pared6_level3.rect):
+                    player1.control(0, 3) # w
+                if player1.rect.colliderect(pared7_level3.rect):
+                    player1.control(0, -3) #s
+                if player1.rect.colliderect(pared8_level3.rect):
+                    player1.control(0, 3) # w
+                if player1.rect.colliderect(pared9_level3.rect):
+                    player1.control(-3, 0) #d
+                if player1.rect.colliderect(pared10_level3.rect):
+                    player1.control(3, 0) #a
+                if enemy2.rect.colliderect(pared1_level3):
+                    direccion_enemy = False
+                if enemy2.rect.colliderect(pared2_level3):
+                    direccion_enemy = True
+                if flag_coin3 == False:
+                    coin3.upgrade()
+                    coin3.dibujar(screen)
+                    if player1.rect.colliderect(coin3.rect):
+                        flag_coin3 = True
+                        score = score + 10
+                if aparicion_level3 == True:
+                    player1.rect.x = 250
+                    player1.rect.y= 445
+                    enemy2.rect.x = 250
+                    enemy2.rect.y= 215
+                    aparicion_level3 = False
+                enemy2.moves_x(direccion_enemy)
+                enemy2.upgrade()
+                enemy2.dibujar(screen)
+                if player1.rect.colliderect(enemy2.rect):
+                    game_over_flag = True
+                if flag_coin3 == True:
+                    bandera3.upgrade()
+                    bandera3.dibujar(screen)
+                    if player1.rect.colliderect(bandera3.rect):
+                        level1 = False
+                        level2 = False
+                        level3 = False
+                        fin_timer = True
+                        win_flag = True
+                        game_over_flag = True
+            player1.upgrade()
+            player1.dibujar(screen, accion_personaje, direccion)
+            screen.blit(text_score,(325,10))
+            screen.blit(text_time,(10,10))
+        if game_over_flag == True:
+            screen.blit(win_img,(0,0)) # Ubicacion del fondo
+            screen.blit(text_restart,(10,450))
+            screen.blit(text_menu,(390,450))
+            if win_flag == True:
+                screen.blit(text_save,(205,450))
     pygame.display.flip()# Muestra los cambios en la pantalla
     milis.tick(FPS)
 pygame.quit() # Fin
-
-"""
-falta poner las paredes
-"""
