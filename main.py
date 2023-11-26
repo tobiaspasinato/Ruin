@@ -10,11 +10,12 @@ from constants import *
 direccion = True
 direccion_enemy = True
 aparicion_level1 = True
+aparicion_level2 = True
 score = 0
 segundos = 0
-level1 = True
-level2 = False
-level3 = False
+level1 = True  #true
+level2 = False #false
+level3 = False #false
 player_level1 = True
 player_level2 = False
 player_level3 = False
@@ -50,6 +51,7 @@ screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una 
 
 player1 = player(0, 0)
 enemy1 = enemy(0, 0)
+enemy2 = enemy(0, 0)
 pared0_level1 = muro(0, 0, 500, 1)
 pared01_level1 = muro(0, 0, 1, 500)
 pared02_level1 = muro(0, 499, 500, 1)
@@ -63,9 +65,21 @@ pared5_level1 = muro(215, 132, 1, 70)
 pared6_level1 = muro(217, 205, 190, 1)
 pared7_level1 = muro(95, 390, 400, 1)
 pared8_level1 = muro(95, 392, 1, 110)
-pared9_level1 = muro(0, 400, 35, 1)
+pared9_level1 = muro(0, 395, 35, 1)
 pared10_level1 = muro(35, 401, 1, 100)
-
+#level 2
+pared1_level2 = muro(0, 395, 500, 1)
+pared2_level2 = muro(95, 0, 1, 500)
+pared3_level2 = muro(404, 0, 1, 140)
+pared4_level2 = muro(407, 138, 100, 1)
+pared5_level2 = muro(0, 180, 210, 1)
+pared6_level2 = muro(0, 70, 210, 1)
+pared7_level2 = muro(213, 70, 1, 110)
+pared8_level2 = muro(253, 230, 60, 1)
+pared9_level2 = muro(253, 300, 60, 1)
+pared10_level2 = muro(251, 230, 1, 72)
+pared11_level2 = muro(314, 233, 1, 67)
+#level 3
 coin1 = coin(335, 298)
 bandera1 = bandera(55, 470)
 coin2 = coin(125, 340)
@@ -145,11 +159,22 @@ while running:
             pared10_level1.crear_muro(screen)
             screen.blit(level1_img,(0,0)) # Ubicacion del fondo
         elif level2 == True:
+            screen.blit(level2_img,(0,0)) # Ubicacion del fondo
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
             pared02_level1.crear_muro(screen)
             pared03_level1.crear_muro(screen)
-            screen.blit(level2_img,(0,0)) # Ubicacion del fondo
+            pared1_level2.crear_muro(screen)
+            pared2_level2.crear_muro(screen)
+            pared3_level2.crear_muro(screen)
+            pared4_level2.crear_muro(screen)
+            pared5_level2.crear_muro(screen)
+            pared6_level2.crear_muro(screen)
+            pared7_level2.crear_muro(screen)
+            pared8_level2.crear_muro(screen)
+            pared9_level2.crear_muro(screen)
+            pared10_level2.crear_muro(screen)
+            pared11_level2.crear_muro(screen)
         elif level3 == True:
             pared0_level1.crear_muro(screen)
             pared01_level1.crear_muro(screen)
@@ -194,6 +219,7 @@ while running:
                 enemy1.rect.x = 230
                 enemy1.rect.y= 250
                 aparicion_level1 = False
+                aparicion_level2 = True
             enemy1.moves(direccion_enemy)
             enemy1.upgrade()
             enemy1.dibujar(screen)
@@ -222,12 +248,56 @@ while running:
                 player1.control(3, 0)
             if player1.rect.colliderect(pared0_level1.rect):
                 player1.control(0, 3)
+            if player1.rect.colliderect(pared1_level2.rect):
+                player1.control(0, -3) #s
+            if player1.rect.colliderect(pared2_level2.rect):
+                player1.control(3, 0) #a
+            if player1.rect.colliderect(pared3_level2.rect):
+                player1.control(-3, 0) #d
+            if player1.rect.colliderect(pared4_level2.rect):
+                player1.control(0, 3) # w
+            if player1.rect.colliderect(pared5_level2.rect):
+                player1.control(0, 3) # w
+            if player1.rect.colliderect(pared6_level2.rect):
+                player1.control(0, -3) #s
+            if player1.rect.colliderect(pared7_level2.rect):
+                player1.control(3, 0) #a
+            if player1.rect.colliderect(pared8_level2.rect):
+                player1.control(0, -3) #s
+            if player1.rect.colliderect(pared9_level2.rect):
+                player1.control(0, 3) # w
+            if player1.rect.colliderect(pared10_level2.rect):
+                player1.control(-3, 0) #d
+            if player1.rect.colliderect(pared11_level2.rect):
+                player1.control(3, 0) #a
+            if enemy1.rect.colliderect(pared5_level2):
+                direccion_enemy = False
+            if enemy1.rect.colliderect(pared1_level2):
+                direccion_enemy = True
             if flag_coin2 == False:
                 coin2.upgrade()
                 coin2.dibujar(screen)
                 if player1.rect.colliderect(coin2.rect):
                     flag_coin2 = True
                     score = score + 10
+            if aparicion_level2 == True:
+                player1.rect.x = 450
+                player1.rect.y= 300
+                enemy1.rect.x = 185
+                enemy1.rect.y= 280
+                enemy2.rect.x = 285
+                enemy2.rect.y= 100
+                aparicion_level2 = False
+            enemy1.moves(direccion_enemy)
+            enemy1.upgrade()
+            enemy1.dibujar(screen)
+            enemy2.moves_x(direccion_enemy)
+            enemy2.upgrade()
+            enemy2.dibujar(screen)
+            if player1.rect.colliderect(enemy1.rect):
+                game_over_flag = True
+            if player1.rect.colliderect(enemy2.rect):
+                game_over_flag = True
             if flag_coin2 == True:
                 bandera2.upgrade()
                 bandera2.dibujar(screen)

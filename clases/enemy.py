@@ -15,6 +15,7 @@ def get_animacion(path, columnas, filas, flip = False):
             surface_fotograma = surface_imagen.subsurface(x, y, fotograma_ancho, fotograma_alto)
             if flip == True:
                 surface_fotograma = pygame.transform.flip(surface_fotograma, True, False)
+            surface_fotograma = pygame.transform.scale(surface_fotograma, (50, 50))
             lista.append(surface_fotograma)
     return lista
 
@@ -34,6 +35,12 @@ class enemy:
             self.move_y = -2
         if dirreccion == False:
             self.move_y = 2
+    
+    def moves_x(self, dirreccion):
+        if dirreccion == True:
+            self.move_x = -2
+        if dirreccion == False:
+            self.move_x = 2
     
     def upgrade(self):
         if self.frame < len(self.animation) - 1:
