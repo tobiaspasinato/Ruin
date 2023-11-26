@@ -8,6 +8,8 @@ from clases.muro import muro
 from constants import *
 
 menu_flag = True
+game_over_flag = False
+
 direccion = True
 direccion_enemy = True
 aparicion_level1 = True
@@ -23,8 +25,6 @@ flag_coin2 = False
 flag_coin3 = False
 fin_timer = False
 win_flag = False
-game_flag = True #false
-game_over_flag = False
 
 milis = pygame.time.Clock()
 
@@ -50,6 +50,8 @@ imagen_level3 = pygame.image.load("./imgs/level 3.png") # Cargar imagen del fond
 level3_img = pygame.transform.scale(imagen_level3, (LARGO_PANTALLA, ANCHO_PANTALLA))
 imagen_ganar = pygame.image.load("imgs\end_img.png") # Cargar imagen del fondo
 win_img = pygame.transform.scale(imagen_ganar, (LARGO_PANTALLA, ANCHO_PANTALLA))
+imagen_menu = pygame.image.load("imgs\\fondo_game.png") # Cargar imagen del fondo
+menu_img = pygame.transform.scale(imagen_menu, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
 player1 = player(0, 0)
@@ -110,7 +112,12 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse = event.pos
-            print(mouse)
+            # print(mouse)
+            if menu_flag == True:
+                if (mouse[0] > 175 and mouse[0] < 330) and (mouse[1] < 380 and mouse[1] > 280):
+                    print(menu_flag)
+                    menu_flag = False
+                    # print(menu_flag)
             if game_over_flag == True:
                 if (mouse[0] > 0 and mouse[0] < 140) and (mouse[1] < 500 and mouse[1] > 440):
                     direccion = True
@@ -128,16 +135,33 @@ while running:
                     flag_coin3 = False
                     fin_timer = False
                     win_flag = False
-                    game_flag = True #false
                     game_over_flag = False
                 if (mouse[0] > 380 and mouse[0] < 500) and (mouse[1] < 500 and mouse[1] > 440):
-                    print("win")
+                    menu_flag = True
+                    direccion = True
+                    direccion_enemy = True
+                    aparicion_level1 = True
+                    aparicion_level2 = False #False
+                    aparicion_level3 = False #False
+                    score = 0
+                    segundos = 0
+                    level1 = True  #true
+                    level2 = False #false
+                    level3 = False #false
+                    flag_coin1 = False
+                    flag_coin2 = False
+                    flag_coin3 = False
+                    fin_timer = False
+                    win_flag = False
+                    game_over_flag = False
                 if (mouse[0] > 200 and mouse[0] < 300) and (mouse[1] < 500 and mouse[1] > 440):
                     print("win2")
         if event.type == timer_segundos:
             if fin_timer == False:
                 segundos = segundos + 1
-    if game_flag == True:
+    if menu_flag == True:
+        screen.blit(menu_img,(0,0))
+    elif menu_flag == False:
         accion_personaje = "stay"
         if game_over_flag == False:
             lista_teclas = pygame.key.get_pressed()
