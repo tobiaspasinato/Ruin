@@ -154,8 +154,9 @@ while running:
                     fin_timer = False
                     win_flag = False
                     game_over_flag = False
-                if (mouse[0] > 200 and mouse[0] < 300) and (mouse[1] < 500 and mouse[1] > 440):
-                    print("win2")
+                if win_flag == True:
+                    if (mouse[0] > 200 and mouse[0] < 300) and (mouse[1] < 500 and mouse[1] > 440):
+                        print("win2")
         if event.type == timer_segundos:
             if fin_timer == False:
                 segundos = segundos + 1
