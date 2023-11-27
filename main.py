@@ -6,6 +6,7 @@ from clases.coin import coin
 from clases.bandera import bandera
 from clases.muro import muro
 from constants import *
+from function import *
 
 menu_flag = True
 game_over_flag = False
@@ -112,12 +113,11 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse = event.pos
-            # print(mouse)
             if menu_flag == True:
                 if (mouse[0] > 175 and mouse[0] < 330) and (mouse[1] < 380 and mouse[1] > 280):
-                    print(menu_flag)
                     menu_flag = False
-                    # print(menu_flag)
+                if (mouse[0] > 0 and mouse[0] < 75) and (mouse[1] < 500 and mouse[1] > 420):
+                    print(leer_csv("tiempo.csv"))
             if game_over_flag == True:
                 if (mouse[0] > 0 and mouse[0] < 140) and (mouse[1] < 500 and mouse[1] > 440):
                     direccion = True
@@ -156,7 +156,7 @@ while running:
                     game_over_flag = False
                 if win_flag == True:
                     if (mouse[0] > 200 and mouse[0] < 300) and (mouse[1] < 500 and mouse[1] > 440):
-                        print("win2")
+                        guardar_archivo("tiempo.csv", f"{segundos}\n")
         if event.type == timer_segundos:
             if fin_timer == False:
                 segundos = segundos + 1
