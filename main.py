@@ -112,7 +112,7 @@ bandera3 = bandera(250, 220)
 running = True
 
 while running:
-    # sonido_fondo.play()
+    sonido_fondo.play()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -157,7 +157,7 @@ while running:
                     aparicion_level3 = False #False
                     score = 0
                     segundos = 0
-                    level1 = True  #true
+                    level1 = True  #trued
                     level2 = False #false
                     level3 = False #false
                     flag_coin1 = False
@@ -168,7 +168,6 @@ while running:
                     game_over_flag = False
                 if win_flag == True:
                     if (mouse[0] > 200 and mouse[0] < 300) and (mouse[1] < 500 and mouse[1] > 440):
-                        generar_json("tiempos.json", nuevo_usuario, "jugadores")
                         guardar_archivo("tiempo.csv", f"{nuevo_usuario}\n")
         if event.type == timer_segundos:
                 if fin_timer == False:
@@ -181,12 +180,12 @@ while running:
             y = 200
             screen.blit(score_img1122,(0,0))
             lista_scores = leer_score_csv("tiempo.csv", lista_scores)
-            print(lista_scores)
+            # print(lista_scores)
             for elemento in lista_scores:
                 nombre = elemento["nombre"]
-                segundos = elemento['segundos']
+                segundos_xs = elemento['segundos']
                 mostrar_texto(font, screen, nombre, BLANCO, 100,y)
-                mostrar_texto(font, screen, segundos, BLANCO, 300,y)
+                mostrar_texto(font, screen, segundos_xs , BLANCO, 300,y)
                 y += 50
         elif score_flag == False:
             fin_timer = False
@@ -215,6 +214,7 @@ while running:
                 text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
                 screen.fill((0, 0, 0))# Se pinta el fondo de la ventana
                 if level1 == True:
+                    screen.blit(level1_img,(0,0)) # Ubicacion del fondo
                     pared1_level1.crear_muro(screen)
                     pared2_level1.crear_muro(screen)
                     pared0_level1.crear_muro(screen)
