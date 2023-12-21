@@ -112,7 +112,7 @@ bandera3 = bandera(250, 220)
 running = True
 
 while running:
-    sonido_fondo.play()
+    #sonido_fondo.play()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -229,7 +229,7 @@ while running:
                     pared8_level1.crear_muro(screen)
                     pared9_level1.crear_muro(screen)
                     pared10_level1.crear_muro(screen)
-                    screen.blit(level1_img,(0,0)) # Ubicacion del fondo
+                    #screen.blit(level1_img,(0,0)) # Ubicacion del fondo
                 elif level2 == True:
                     pared0_level1.crear_muro(screen)
                     pared01_level1.crear_muro(screen)
