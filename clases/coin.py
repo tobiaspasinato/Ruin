@@ -20,7 +20,7 @@ def get_animacion(path, columnas, filas, flip = False):
 
 class coin:
     def __init__(self, x : int, y : int) -> None:
-        self.stay = get_animacion("imgs\coin.png", 6, 1)
+        self.stay = get_animacion("Ruin/imgs/coin.png", 6, 1)
         self.frame = 0
         self.move_x = x
         self.move_y = y

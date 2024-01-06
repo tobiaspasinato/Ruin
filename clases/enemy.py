@@ -21,8 +21,8 @@ def get_animacion(path, columnas, filas, flip = False):
 
 class enemy:
     def __init__(self, x : int, y : int) -> None:
-        self.stay_r = get_animacion("imgs\enemy.png", 5, 1)
-        self.stay_i = get_animacion("imgs\enemy.png", 5, 1)
+        self.stay_r = get_animacion("Ruin/imgs/enemy.png", 5, 1)
+        self.stay_i = get_animacion("Ruin/imgs/enemy.png", 5, 1)
         self.frame = 0
         self.move_x = x
         self.move_y = y

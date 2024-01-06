@@ -36,9 +36,9 @@ pygame.init() #Se inicializa pygame
 timer_segundos = pygame.USEREVENT
 pygame.time.set_timer(timer_segundos, 1000)
 pygame.mixer.init()
-pygame.mixer.music.set_volume(0.7)
-sonido_fondo = pygame.mixer.Sound("music\music_game.wav")
-sonido_fondo.set_volume(VOLUMEN_MUSICA)
+#pygame.mixer.music.set_volume(0.7)
+#sonido_fondo = pygame.mixer.Sound("Ruin/music")
+#sonido_fondo.set_volume(VOLUMEN_MUSICA)
 font = pygame.font.SysFont("Arial Narrow", 50)
 text_score = font.render(f"Score: {score}", True, (0, 0, 0))
 text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
@@ -46,17 +46,17 @@ text_restart = font.render("Restart", True, (255, 255, 255))
 text_save = font.render("Save", True, (255, 255, 255))
 text_menu = font.render("Menu", True, (255, 255, 255))
 pygame.display.set_caption("Ruin") # Nombre de la pestaña
-imagen_level1 = pygame.image.load("./imgs/level 1.png") # Cargar imagen del fondo
+imagen_level1 = pygame.image.load("Ruin/imgs/level 1.png") # Cargar imagen del fondo
 level1_img = pygame.transform.scale(imagen_level1, (LARGO_PANTALLA, ANCHO_PANTALLA))
-imagen_level2 = pygame.image.load("./imgs/level 2.png") # Cargar imagen del fondo
+imagen_level2 = pygame.image.load("Ruin/imgs/level 2.png") # Cargar imagen del fondo
 level2_img = pygame.transform.scale(imagen_level2, (LARGO_PANTALLA, ANCHO_PANTALLA))
-imagen_level3 = pygame.image.load("./imgs/level 3.png") # Cargar imagen del fondo
+imagen_level3 = pygame.image.load("Ruin/imgs/level 3.png") # Cargar imagen del fondo
 level3_img = pygame.transform.scale(imagen_level3, (LARGO_PANTALLA, ANCHO_PANTALLA))
-imagen_ganar = pygame.image.load("imgs\end_img.png") # Cargar imagen del fondo
+imagen_ganar = pygame.image.load("Ruin/imgs/end_img.png") # Cargar imagen del fondo
 win_img = pygame.transform.scale(imagen_ganar, (LARGO_PANTALLA, ANCHO_PANTALLA))
-imagen_menu = pygame.image.load("imgs\\fondo_game.png") # Cargar imagen del fondo
+imagen_menu = pygame.image.load("Ruin/imgs/fondo_game.png") # Cargar imagen del fondo
 menu_img = pygame.transform.scale(imagen_menu, (LARGO_PANTALLA, ANCHO_PANTALLA))
-imagen_score1122 = pygame.image.load("imgs\\score_table.png")
+imagen_score1122 = pygame.image.load("Ruin/imgs/score_table.png")
 score_img1122 = pygame.transform.scale(imagen_score1122, (LARGO_PANTALLA, ANCHO_PANTALLA))
 screen = pygame.display.set_mode([LARGO_PANTALLA, ANCHO_PANTALLA]) #Se crea una ventana
 
