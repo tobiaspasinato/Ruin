@@ -205,8 +205,8 @@ while running:
                         direccion = True
                         accion_personaje = "walk"
                         player1.control(3, 0)
-                    if lista_teclas[K_m]:
-                        sonido_fondo.stop()
+                    #if lista_teclas[K_m]:
+                        #sonido_fondo.stop()
                 
                 text_score = font.render(f"Score: {score}", True, (0, 0, 0))
                 text_time = font.render(f"Time: {segundos}", True, (0, 0, 0))
@@ -227,7 +227,7 @@ while running:
                     pared8_level1.crear_muro(screen)
                     pared9_level1.crear_muro(screen)
                     pared10_level1.crear_muro(screen)
-                    #screen.blit(level1_img,(0,0)) # Ubicacion del fondo
+                    screen.blit(level1_img,(0,0)) # Ubicacion del fondo
                 elif level2 == True:
                     pared0_level1.crear_muro(screen)
                     pared01_level1.crear_muro(screen)
