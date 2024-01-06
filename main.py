@@ -122,12 +122,10 @@ while running:
                 if (mouse[0] > 175 and mouse[0] < 330) and (mouse[1] < 380 and mouse[1] > 280):
                     menu_flag = False
                 if (mouse[0] > 0 and mouse[0] < 75) and (mouse[1] < 500 and mouse[1] > 420):
-                    print("holii")
                     menu_flag = False
                     score_flag = True
             if score_flag == True:
                 if (mouse[0] > 425 and mouse[0] < 500) and (mouse[1] < 500 and mouse[1] > 420):
-                    print("holiiiiasd")
                     score_flag = False
                     menu_flag = True
             if game_over_flag == True:
