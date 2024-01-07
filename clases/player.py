@@ -1,7 +1,7 @@
 import pygame
 from constants import *
 
-def get_animacion(path, columnas, filas, flip = False):
+def get_animacion(path : str, columnas : int, filas : int, flip = False):
     lista = []
     surface_imagen = pygame.image.load(path)
     fotograma_ancho = int(surface_imagen.get_width()/columnas)
