@@ -20,7 +20,7 @@ def get_animacion(path, columnas, filas, flip = False):
 
 class bandera:
     def __init__(self, x : int, y : int) -> None:
-        self.stay = get_animacion("imgs\\bandera.png", 5, 1)
+        self.stay = get_animacion("Ruin/imgs/bandera.png", 5, 1)
         self.frame = 0
         self.move_x = x
         self.move_y = y

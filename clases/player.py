@@ -1,7 +1,7 @@
 import pygame
 from constants import *
 
-def get_animacion(path, columnas, filas, flip = False):
+def get_animacion(path : str, columnas : int, filas : int, flip = False):
     lista = []
     surface_imagen = pygame.image.load(path)
     fotograma_ancho = int(surface_imagen.get_width()/columnas)
@@ -19,10 +19,10 @@ def get_animacion(path, columnas, filas, flip = False):
 
 class player:
     def __init__(self, x : int, y : int) -> None:
-        self.walk_r = get_animacion("imgs\player_run.png", 4, 1)
-        self.stay_r = get_animacion("imgs\player_stay.png", 4, 1)
-        self.walk_i = get_animacion("imgs\player_run.png", 4, 1, True)
-        self.stay_i = get_animacion("imgs\player_stay.png", 4, 1, True)
+        self.walk_r = get_animacion("Ruin/imgs/player_run.png", 4, 1)
+        self.stay_r = get_animacion("Ruin/imgs/player_stay.png", 4, 1)
+        self.walk_i = get_animacion("Ruin/imgs/player_run.png", 4, 1, True)
+        self.stay_i = get_animacion("Ruin/imgs/player_stay.png", 4, 1, True)
         self.frame = 0
         self.move_x = x
         self.move_y = y
